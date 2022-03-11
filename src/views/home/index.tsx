@@ -10,6 +10,7 @@ import {
   MetadataData,
   Metadata,
 } from "@metaplex-foundation/mpl-token-metadata";
+import { useMeta } from "../../contexts";
 
 const { Content } = Layout;
 const { Meta } = Card;
@@ -17,6 +18,8 @@ const { Connection, clusterApiUrl, PublicKey } = solanaWeb3;
 
 const Home: React.FC = () => {
   const [visible, setVisible] = React.useState(false);
+  const { foreground, background } = useMeta();
+  console.log("Foreground ", foreground);
   const [selectedNFT, setSelectedNFT] = React.useState<NFT_Props | null>();
   const navigate = useNavigate();
   const wallet = useWallet();
