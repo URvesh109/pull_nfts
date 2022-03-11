@@ -17,7 +17,7 @@ const App = () => {
   const endpoint = React.useMemo(() => clusterApiUrl(network), [network]);
   const wallets = React.useMemo(
     () => [new PhantomWalletAdapter(), new SolflareWalletAdapter()],
-    [network]
+    []
   );
   return (
     <ConnectionProvider endpoint={endpoint}>
