@@ -1,5 +1,7 @@
-import React, { createContext, useContext } from "react";
-
+import React, { createContext, useContext, useEffect } from "react";
+import { PublicKey } from "@solana/web3.js";
+import * as anchor from "@project-serum/anchor";
+import { getMintAdress } from "./helper";
 interface Color {
   foreground: string;
   background: string;
@@ -21,6 +23,10 @@ const themes: ThemeContextState = {
   },
 };
 
+export const CANDY_MACHINE_PROGRAM = new anchor.web3.PublicKey(
+  "cndy3Z4yapfJBmL3ShUp5exZKqR3z33thTzeNMm2gRZ"
+);
+
 const MetaContext = React.createContext<Color | null>(null);
 
 export const MetaProvider = ({
@@ -28,6 +34,13 @@ export const MetaProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
+  // const candyMachine = process.env.REACT_APP_CANDY_MACHINE_ID;
+  const candyMachine = new anchor.web3.PublicKey(
+    "H5Hwwitjxmeg9PhDmJdXanTMrCnYqRAV7bibnmBT4p3f"
+  );
+  useEffect(() => {
+    getMintAdress();
+  }, [candyMachine]);
   // fetch nfts relevant to candy machine
 
   return (

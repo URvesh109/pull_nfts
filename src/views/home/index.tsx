@@ -19,7 +19,6 @@ const { Connection, clusterApiUrl, PublicKey } = solanaWeb3;
 const Home: React.FC = () => {
   const [visible, setVisible] = React.useState(false);
   const { foreground, background } = useMeta();
-  console.log("Foreground ", foreground);
   const [selectedNFT, setSelectedNFT] = React.useState<NFT_Props | null>();
   const navigate = useNavigate();
   const wallet = useWallet();
@@ -32,12 +31,6 @@ const Home: React.FC = () => {
           const tokenMint = "FRGEk6yYVPb4nWPmhA9VNUXrxKu5ovvmtG1X9V1HwqQG";
           const metaDataPDA = await Metadata.getPDA(new PublicKey(tokenMint));
           const tokenMetadata = await Metadata.load(connection, metaDataPDA);
-          console.log("tokenMetadata", tokenMetadata);
-          // const acc = await connection.getAccountInfo(
-          //   new PublicKey("2gpHfRAfDmNbXGntSoMfbqLnc1uTZCNGrNQhmm3nKB5S")
-          // );
-          // const data = decodeMetadata(acc!.data);
-          // console.log("Acc is ", data);
         }
       } catch (error) {
         console.log("Error ", error);

@@ -13,7 +13,6 @@ import {
 import { WalletModalProvider } from "@solana/wallet-adapter-ant-design";
 
 const App = () => {
-  console.log("process ", process.env.REACT_APP_CANDY_MACHINE_ID);
   const network = WalletAdapterNetwork.Devnet;
   const endpoint = React.useMemo(() => clusterApiUrl(network), [network]);
   const wallets = React.useMemo(
