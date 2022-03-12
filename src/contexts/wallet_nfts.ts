@@ -5,7 +5,7 @@ import { WalletContextState } from "@solana/wallet-adapter-react";
 import {
   TransactionInstruction,
   Transaction,
-  sendAndConfirmTransaction,
+  PublicKey,
 } from "@solana/web3.js";
 
 export const pullAll_NFT_WALlET = async () => {
@@ -27,13 +27,20 @@ export const pullAll_NFT_WALlET = async () => {
   }
 };
 
+/// eg for signing transaction through wallet
 export const signTransactions = async (
   wallet: WalletContextState,
   connection: Connection
 ) => {
   try {
     const instruction = new TransactionInstruction({
-      keys: [{ pubkey: TOKEN_PROGRAM_ID, isSigner: false, isWritable: false }],
+      keys: [
+        {
+          pubkey: new PublicKey("2VhzX3tx7tv5NzXWW7ui8jJUdfvoQp5iqvFG5NgqFea4"),
+          isSigner: false,
+          isWritable: false,
+        },
+      ],
       programId: TOKEN_PROGRAM_ID,
     });
     const trans = new Transaction().add(instruction);
