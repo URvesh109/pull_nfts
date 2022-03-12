@@ -8,17 +8,15 @@ import {
   PublicKey,
 } from "@solana/web3.js";
 
-export const pullAll_NFT_WALlET = async () => {
-  const connection = new Connection("devnet");
-  const ownerPublickey = "F53Z5hbWa7sMcbwQRu3QYH7H9wjDE5NnH69N4n7cRFnU";
+export const get_all_nft_from_wallet = async (
+  wallet: WalletContextState,
+  connection: Connection
+) => {
+  if (!wallet.publicKey) return;
   try {
-    // const nftsmetadata = await Metadata.findMany(connection, {
-    //   creators: [ownerPublickey],
-    // });
-
     const nftsmetadata = await Metadata.findDataByOwner(
       connection,
-      ownerPublickey
+      wallet.publicKey
     );
 
     console.log(nftsmetadata);
