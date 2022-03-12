@@ -6,11 +6,7 @@ import { ContentStyle, RowStyle, ButtonStyle } from "../../CommonStyle";
 import { nfts, NFT_Props } from "../../data";
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 // import { useMeta } from "../../contexts";
-import {
-  fetch_accounts,
-  get_all_nft_from_wallet,
-  get_mint_metadata,
-} from "../../actions";
+import { fetch_accounts, get_all_nft_from_wallet } from "../../actions";
 
 const { Content } = Layout;
 const { Meta } = Card;
@@ -26,7 +22,7 @@ const Home: React.FC = () => {
   React.useEffect(() => {
     const fnGetMintMetadata = async () => {
       try {
-        await fetch_accounts(wallet, connection);
+        await get_all_nft_from_wallet(wallet, connection);
       } catch (error) {}
     };
     fnGetMintMetadata();
