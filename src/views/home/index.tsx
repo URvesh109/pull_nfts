@@ -6,8 +6,8 @@ import { ContentStyle, RowStyle, ButtonStyle } from "../../CommonStyle";
 import { nfts, NFT_Props } from "../../data";
 import * as solanaWeb3 from "@solana/web3.js";
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
-import { Metadata } from "@metaplex-foundation/mpl-token-metadata";
 import { useMeta } from "../../contexts";
+import { getMintMetadata } from "../../actions";
 
 const { Content } = Layout;
 const { Meta } = Card;
@@ -22,20 +22,12 @@ const Home: React.FC = () => {
   const wallet = useWallet();
 
   React.useEffect(() => {
-    async function getAccountInfo() {
+    const fnGetMintMetadata = async () => {
       try {
-        if (wallet?.publicKey) {
-          const tokenMint = "FRGEk6yYVPb4nWPmhA9VNUXrxKu5ovvmtG1X9V1HwqQG";
-          const metaDataPDA = await Metadata.getPDA(new PublicKey(tokenMint));
-          const tokenMetadata = await Metadata.load(connection, metaDataPDA);
-          console.log(tokenMetadata);
-          // await signTransactions(wallet, connection);
-        }
-      } catch (error) {
-        console.log("Error ", error);
-      }
-    }
-    getAccountInfo();
+        await getMintMetadata(connection);
+      } catch (error) {}
+    };
+    fnGetMintMetadata();
   }, [wallet, connection]);
 
   return (
