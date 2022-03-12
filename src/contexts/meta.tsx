@@ -1,7 +1,5 @@
-import React, { createContext, useContext, useEffect } from "react";
-import { PublicKey } from "@solana/web3.js";
+import React, { useContext } from "react";
 import * as anchor from "@project-serum/anchor";
-import { pullAll_NFT_WALlET } from "./wallet_nfts";
 interface Color {
   foreground: string;
   background: string;
@@ -34,15 +32,8 @@ export const MetaProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  // const candyMachine = process.env.REACT_APP_CANDY_MACHINE_ID;
-  const candyMachine = new anchor.web3.PublicKey(
-    "H5Hwwitjxmeg9PhDmJdXanTMrCnYqRAV7bibnmBT4p3f"
-  );
-  useEffect(() => {
-    pullAll_NFT_WALlET();
-  }, [candyMachine]);
-  // fetch nfts relevant to candy machine
-
+  const candyMachine = process.env.REACT_APP_CANDY_MACHINE_ID;
+  console.log(candyMachine);
   return (
     <MetaContext.Provider value={themes.dark}>{children}</MetaContext.Provider>
   );

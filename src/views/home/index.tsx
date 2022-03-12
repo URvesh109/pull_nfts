@@ -3,19 +3,15 @@ import { Layout, Button, List, Card, BackTop, Modal } from "antd";
 import { ArrowUpOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { ContentStyle, RowStyle, ButtonStyle } from "../../CommonStyle";
-import { nfts, NFT_Props, decodeMetadata } from "../../data";
+import { nfts, NFT_Props } from "../../data";
 import * as solanaWeb3 from "@solana/web3.js";
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
-import {
-  MetadataData,
-  Metadata,
-} from "@metaplex-foundation/mpl-token-metadata";
+import { Metadata } from "@metaplex-foundation/mpl-token-metadata";
 import { useMeta } from "../../contexts";
-import { signTransactions } from "../../contexts/wallet_nfts";
 
 const { Content } = Layout;
 const { Meta } = Card;
-const { Connection, clusterApiUrl, PublicKey } = solanaWeb3;
+const { PublicKey } = solanaWeb3;
 
 const Home: React.FC = () => {
   const [visible, setVisible] = React.useState(false);
@@ -33,7 +29,7 @@ const Home: React.FC = () => {
           const metaDataPDA = await Metadata.getPDA(new PublicKey(tokenMint));
           const tokenMetadata = await Metadata.load(connection, metaDataPDA);
           console.log(tokenMetadata);
-          await signTransactions(wallet, connection);
+          // await signTransactions(wallet, connection);
         }
       } catch (error) {
         console.log("Error ", error);
@@ -146,13 +142,6 @@ const Home: React.FC = () => {
   );
 };
 
-const CustomizeContentStyle: React.CSSProperties = {
-  ...ContentStyle,
-  display: "flex",
-  alignItems: "center",
-  flexDirection: "column",
-};
-
 const ContentWrapStyle: React.CSSProperties = {
   display: "flex",
   flexWrap: "wrap",
@@ -165,26 +154,9 @@ const CardStyle: React.CSSProperties = {
   borderRadius: 15,
 };
 
-const FlexEnd: React.CSSProperties = {
-  flex: 1,
-  display: "flex",
-};
-
 const FlexStart: React.CSSProperties = {
   flex: 1,
   display: "flex",
-};
-
-const AttributeStyle: React.CSSProperties = {
-  height: 300,
-  overflowY: "scroll",
-  marginRight: 10,
-};
-
-const FusedAttributeStyle: React.CSSProperties = {
-  height: 300,
-  overflowY: "scroll",
-  marginRight: 10,
 };
 
 const AttributesBox: React.CSSProperties = {
