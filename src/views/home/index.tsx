@@ -4,18 +4,16 @@ import { ArrowUpOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { ContentStyle, RowStyle, ButtonStyle } from "../../CommonStyle";
 import { nfts, NFT_Props } from "../../data";
-import * as solanaWeb3 from "@solana/web3.js";
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
-import { useMeta } from "../../contexts";
+// import { useMeta } from "../../contexts";
 import { getMintMetadata } from "../../actions";
 
 const { Content } = Layout;
 const { Meta } = Card;
-const { PublicKey } = solanaWeb3;
 
 const Home: React.FC = () => {
   const [visible, setVisible] = React.useState(false);
-  const { foreground, background } = useMeta();
+  // const { foreground, background } = useMeta();
   const { connection } = useConnection();
   const [selectedNFT, setSelectedNFT] = React.useState<NFT_Props | null>();
   const navigate = useNavigate();
