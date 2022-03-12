@@ -46,7 +46,7 @@ export const signTransactions = async (
     const trans = new Transaction().add(instruction);
     const id = await wallet.sendTransaction(trans, connection);
 
-    const final = await connection.confirmTransaction(id, "processed");
+    await connection.confirmTransaction(id, "processed");
   } catch (error) {
     console.log("Error", error);
   }

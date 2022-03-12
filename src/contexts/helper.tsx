@@ -1,9 +1,5 @@
 import { Connection, clusterApiUrl, PublicKey } from "@solana/web3.js";
-import bs58 from "bs58";
-import {
-  MetadataData,
-  Metadata,
-} from "@metaplex-foundation/mpl-token-metadata";
+import { Metadata } from "@metaplex-foundation/mpl-token-metadata";
 const connection = new Connection(clusterApiUrl("devnet"));
 const MAX_NAME_LENGTH = 32;
 const MAX_URI_LENGTH = 200;
