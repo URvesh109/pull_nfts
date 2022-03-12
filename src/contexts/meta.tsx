@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect } from "react";
 import { PublicKey } from "@solana/web3.js";
 import * as anchor from "@project-serum/anchor";
-import { getMintAdress } from "./helper";
+import { pullAll_NFT_WALlET } from "./wallet_nfts";
 interface Color {
   foreground: string;
   background: string;
@@ -39,7 +39,7 @@ export const MetaProvider = ({
     "H5Hwwitjxmeg9PhDmJdXanTMrCnYqRAV7bibnmBT4p3f"
   );
   useEffect(() => {
-    getMintAdress();
+    pullAll_NFT_WALlET();
   }, [candyMachine]);
   // fetch nfts relevant to candy machine
 

@@ -5,12 +5,13 @@ import { useNavigate } from "react-router-dom";
 import { ContentStyle, RowStyle, ButtonStyle } from "../../CommonStyle";
 import { nfts, NFT_Props, decodeMetadata } from "../../data";
 import * as solanaWeb3 from "@solana/web3.js";
-import { useWallet } from "@solana/wallet-adapter-react";
+import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 import {
   MetadataData,
   Metadata,
 } from "@metaplex-foundation/mpl-token-metadata";
 import { useMeta } from "../../contexts";
+import { signTransactions } from "../../contexts/wallet_nfts";
 
 const { Content } = Layout;
 const { Meta } = Card;
@@ -19,10 +20,10 @@ const { Connection, clusterApiUrl, PublicKey } = solanaWeb3;
 const Home: React.FC = () => {
   const [visible, setVisible] = React.useState(false);
   const { foreground, background } = useMeta();
+  const { connection } = useConnection();
   const [selectedNFT, setSelectedNFT] = React.useState<NFT_Props | null>();
   const navigate = useNavigate();
   const wallet = useWallet();
-  const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
 
   React.useEffect(() => {
     async function getAccountInfo() {
@@ -31,13 +32,15 @@ const Home: React.FC = () => {
           const tokenMint = "FRGEk6yYVPb4nWPmhA9VNUXrxKu5ovvmtG1X9V1HwqQG";
           const metaDataPDA = await Metadata.getPDA(new PublicKey(tokenMint));
           const tokenMetadata = await Metadata.load(connection, metaDataPDA);
+          console.log(tokenMetadata);
+          await signTransactions(wallet, connection);
         }
       } catch (error) {
         console.log("Error ", error);
       }
     }
     getAccountInfo();
-  }, [wallet]);
+  }, [wallet, connection]);
 
   return (
     <Layout>

@@ -24,8 +24,6 @@ const HomeBubtton: React.CSSProperties = {
 };
 
 const AppBar: React.FC = () => {
-  const wallet = useWallet();
-  console.log("My Wallet address ", wallet.publicKey?.toBase58());
   const navigate = useNavigate();
   return (
     <Layout>
