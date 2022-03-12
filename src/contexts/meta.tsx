@@ -33,7 +33,7 @@ export const MetaProvider = ({
   children: React.ReactNode;
 }) => {
   const candyMachine = process.env.REACT_APP_CANDY_MACHINE_ID;
-  console.log(candyMachine);
+  // console.log(candyMachine);
   return (
     <MetaContext.Provider value={themes.dark}>{children}</MetaContext.Provider>
   );

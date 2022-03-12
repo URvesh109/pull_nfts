@@ -14,11 +14,10 @@ export const get_all_nft_from_wallet = async (
 ) => {
   if (!wallet.publicKey) return;
   try {
-    const nftsmetadata = await Metadata.findDataByOwner(
+    const nftsmetadata = await Metadata.findInfoByOwner(
       connection,
       wallet.publicKey
     );
-
     console.log(nftsmetadata);
   } catch (error) {
     console.log("Error ", error);
