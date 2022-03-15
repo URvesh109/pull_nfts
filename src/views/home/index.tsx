@@ -4,9 +4,12 @@ import { ArrowUpOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { ContentStyle, RowStyle, ButtonStyle } from "../../CommonStyle";
 import { nfts, NFT_Props } from "../../data";
+import { MetadataData } from "@metaplex-foundation/mpl-token-metadata";
+
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 // import { useMeta } from "../../contexts";
 import { fetch_accounts, get_all_nft_from_wallet } from "../../actions";
+import { ArtCard } from "../../components";
 
 const { Content } = Layout;
 const { Meta } = Card;
@@ -15,18 +18,20 @@ const Home: React.FC = () => {
   const [visible, setVisible] = React.useState(false);
   // const { foreground, background } = useMeta();
   const { connection } = useConnection();
-  const [selectedNFT, setSelectedNFT] = React.useState<NFT_Props | null>();
+  const [selectedNFT, setSelectedNFT] = React.useState<MetadataData | null>();
+  const [walletNFT, setWalletNFT] = React.useState<Array<MetadataData> | []>();
   const navigate = useNavigate();
   const wallet = useWallet();
 
   React.useEffect(() => {
     const fnGetMintMetadata = async () => {
       try {
-        await get_all_nft_from_wallet(wallet, connection);
+        const metadata = await get_all_nft_from_wallet(wallet, connection);
+        setWalletNFT(metadata);
       } catch (error) {}
     };
     fnGetMintMetadata();
-  }, [wallet, connection]);
+  }, [wallet, connection, setWalletNFT]);
 
   return (
     <Layout>
@@ -34,7 +39,7 @@ const Home: React.FC = () => {
         <div className="home-div" style={RowStyle}>
           <h1 className="my-alpha-header">
             <span className="my-alpha-title">My Alpha</span>
-            <span className="my-alpha-count">{nfts.length}</span>
+            <span className="my-alpha-count">{walletNFT?.length}</span>
           </h1>
           <div className="my-color">
             <Button style={ButtonStyle} onClick={() => navigate(`/fusion`)}>
@@ -44,7 +49,7 @@ const Home: React.FC = () => {
         </div>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <List
-            dataSource={nfts}
+            dataSource={walletNFT}
             style={{ display: "flex", justifyContent: "center" }}
             grid={{
               gutter: 10,
@@ -58,17 +63,18 @@ const Home: React.FC = () => {
             }}
             renderItem={(item, index) => (
               <List.Item>
-                <Card
+                <ArtCard
+                  item={item}
                   onClick={() => {
                     setSelectedNFT(item);
                     setVisible(true);
                   }}
                   hoverable
                   style={{ borderRadius: 10 }}
-                  cover={<img alt="example" src={item.image} />}
+                  // cover={<img alt="example" src={item.image} />}
                 >
-                  <Meta title={item.name} description={item.description} />
-                </Card>
+                  <Meta title={item.data.name} description={item.data.symbol} />
+                </ArtCard>
               </List.Item>
             )}
           />
@@ -92,17 +98,14 @@ const Home: React.FC = () => {
       >
         <div>
           <div className="content-wrap-style" style={ContentWrapStyle}>
-            <div className="flex-start-style" style={FlexStart}>
+            {/* <div className="flex-start-style" style={FlexStart}>
               <Card
                 hoverable
                 className="card-style"
                 style={{ ...CardStyle, width: 300 }}
                 cover={<img alt="example" src={selectedNFT?.image} />}
               >
-                <Meta
-                  title={selectedNFT?.name}
-                  description={selectedNFT?.description}
-                />
+                <Meta title={selectedNFT?.name} description={selectedNFT?.description} />
               </Card>
               <div className="attributes-style">
                 <List
@@ -124,7 +127,7 @@ const Home: React.FC = () => {
                   )}
                 />
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </Modal>

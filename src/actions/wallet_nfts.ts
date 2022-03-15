@@ -2,33 +2,22 @@ import { Connection } from "@metaplex/js";
 import { Metadata } from "@metaplex-foundation/mpl-token-metadata";
 import { TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import { WalletContextState } from "@solana/wallet-adapter-react";
-import {
-  TransactionInstruction,
-  Transaction,
-  PublicKey,
-} from "@solana/web3.js";
+import { TransactionInstruction, Transaction, PublicKey } from "@solana/web3.js";
 
 export const get_all_nft_from_wallet = async (
   wallet: WalletContextState,
-  connection: Connection
+  connection: Connection,
 ) => {
   if (!wallet.publicKey) return;
   try {
-    const nftsmetadata = await Metadata.findDataByOwner(
-      connection,
-      wallet.publicKey
-    );
-    console.log(nftsmetadata);
+    return await Metadata.findDataByOwner(connection, wallet.publicKey);
   } catch (error) {
     console.log("Error ", error);
   }
 };
 
 /// eg for signing transaction through wallet
-export const signTransactions = async (
-  wallet: WalletContextState,
-  connection: Connection
-) => {
+export const signTransactions = async (wallet: WalletContextState, connection: Connection) => {
   try {
     const instruction = new TransactionInstruction({
       keys: [

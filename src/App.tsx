@@ -7,21 +7,21 @@ import { PhantomWalletAdapter, SolflareWalletAdapter } from "@solana/wallet-adap
 import { WalletModalProvider } from "@solana/wallet-adapter-ant-design";
 
 const App = () => {
-    const network = WalletAdapterNetwork.Devnet;
-    const endpoint = React.useMemo(() => clusterApiUrl(network), [network]);
-    const wallets = React.useMemo(
-        () => [new PhantomWalletAdapter(), new SolflareWalletAdapter()],
-        [],
-    );
-    return (
-        <ConnectionProvider endpoint={endpoint}>
-            <WalletProvider wallets={wallets} autoConnect>
-                <WalletModalProvider>
-                    <AppNavigation />
-                </WalletModalProvider>
-            </WalletProvider>
-        </ConnectionProvider>
-    );
+  const network = WalletAdapterNetwork.Devnet;
+  const endpoint = React.useMemo(() => clusterApiUrl(network), [network]);
+  const wallets = React.useMemo(
+    () => [new PhantomWalletAdapter(), new SolflareWalletAdapter()],
+    [],
+  );
+  return (
+    <ConnectionProvider endpoint={endpoint}>
+      <WalletProvider wallets={wallets} autoConnect>
+        <WalletModalProvider>
+          <AppNavigation />
+        </WalletModalProvider>
+      </WalletProvider>
+    </ConnectionProvider>
+  );
 };
 
 export default App;

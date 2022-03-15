@@ -6,10 +6,7 @@ import { PublicKey } from "@solana/web3.js";
 import { Metadata } from "@metaplex-foundation/mpl-token-metadata";
 import BN from "bn.js";
 
-export const fetch_accounts = async (
-  wallet: WalletContextState,
-  connection: Connection
-) => {
+export const fetch_accounts = async (wallet: WalletContextState, connection: Connection) => {
   if (!wallet.publicKey) return;
 
   const accounts = await connection.getTokenAccountsByOwner(wallet.publicKey, {
