@@ -1,5 +1,28 @@
+@import "~antd/es/style/themes/dark.less";
 @import "~antd/dist/antd.dark.less";
 @import "@solana/wallet-adapter-ant-design/styles.css";
+
+html {
+  overflow-y: scroll;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  --row-highlight: @background-color-base;
+  margin: 0;
+  font-style: normal;
+  font-weight: normal;
+  font-family: "Graphik Web" !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: @solana-green !important;
+}
+
+.ant-layout {
+  background: @solana-green;
+}
+
 .ant-layout-header {
   @media (max-width: 475px) {
     padding: 0 10px;

@@ -3,7 +3,6 @@ import { Layout, Button, List, Card, BackTop, Modal } from "antd";
 import { ArrowUpOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { ContentStyle, RowStyle, ButtonStyle } from "../../CommonStyle";
-import { nfts, NFT_Props } from "../../data";
 import { MetadataData } from "@metaplex-foundation/mpl-token-metadata";
 
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
@@ -63,16 +62,7 @@ const Home: React.FC = () => {
             }}
             renderItem={(item, index) => (
               <List.Item>
-                <ArtCard
-                  item={item}
-                  onClick={() => {
-                    setSelectedNFT(item);
-                    setVisible(true);
-                  }}
-                  hoverable
-                  style={{ borderRadius: 10 }}
-                  // cover={<img alt="example" src={item.image} />}
-                >
+                <ArtCard item={item} hoverable style={{ borderRadius: 10 }}>
                   <Meta title={item.data.name} description={item.data.symbol} />
                 </ArtCard>
               </List.Item>
