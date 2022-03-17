@@ -10,7 +10,7 @@ export const ArtCard = (props: ArtCardProps) => {
   const { item, children, ...restProps } = props;
   return (
     <>
-      <Card cover={<Image alt="example" src={item.image} />} {...restProps}>
+      <Card cover={<Image preview={false} alt="example" src={item.image} />} {...restProps}>
         {children}
       </Card>
     </>

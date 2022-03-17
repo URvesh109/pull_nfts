@@ -1,4 +1,4 @@
-import { Transaction, PublicKey, Connection } from "@solana/web3.js";
+import { Transaction, PublicKey, Connection, Signer } from "@solana/web3.js";
 // eslint-disable-next-line
 import { TOKEN_PROGRAM_ID, Token } from "@solana/spl-token";
 // eslint-enable
@@ -26,10 +26,20 @@ export const burn_nft_transac = async (
       1,
     );
 
+    // const closeInstr = Token.createCloseAccountInstruction(
+    //   TOKEN_PROGRAM_ID,
+    //   mintAddress,
+    //   wallet.publicKey,
+    //   wallet.publicKey,
+    //   [],
+    // );
+
     transactions.add(burnInst);
+    // transactions.add(closeInstr);
     const id = await wallet.sendTransaction(transactions, connection);
     await connection.confirmTransaction(id, "processed");
   } catch (error) {
     console.log("Error", error);
+    return Promise.reject();
   }
 };

@@ -15,6 +15,8 @@ const { Meta } = Card;
 
 const Home: React.FC = () => {
   const [visible, setVisible] = React.useState(false);
+  const [isLoading, setLoading] = React.useState(false);
+
   // const { foreground, background } = useMeta();
   const { connection } = useConnection();
   const [selectedNFT, setSelectedNFT] = React.useState<CustomMetadata | null>();
@@ -26,9 +28,13 @@ const Home: React.FC = () => {
   React.useEffect(() => {
     const fnGetMintMetadata = async () => {
       try {
+        setLoading(true);
         const metadata = await get_all_nft_from_wallet(wallet, connection);
         setWalletNFT(metadata);
-      } catch (error) {}
+      } catch (error) {
+      } finally {
+        setLoading(false);
+      }
     };
     fnGetMintMetadata();
   }, [wallet, connection, setWalletNFT]);
@@ -78,9 +84,10 @@ const Home: React.FC = () => {
               sm: 2,
               xs: 1,
             }}
-            renderItem={(item, index) => (
+            renderItem={(item) => (
               <List.Item>
                 <ArtCard
+                  loading={isLoading}
                   onClick={() => {
                     setSelectedNFT(item);
                     setVisible(true);
@@ -116,7 +123,6 @@ const Home: React.FC = () => {
             <div className="flex-start-style" style={FlexStart}>
               <Card
                 hoverable
-                className="card-style"
                 style={{ ...CardStyle, width: 300 }}
                 cover={<img alt="example" src={selectedNFT?.manifest.image} />}
               >
