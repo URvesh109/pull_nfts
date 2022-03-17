@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Layout, Button, List, Card, BackTop, Modal, notification } from "antd";
+import { Layout, Button, List, Card, BackTop, Modal, notification, Spin } from "antd";
 import { ArrowUpOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { ContentStyle, RowStyle, ButtonStyle } from "../../CommonStyle";
@@ -70,38 +70,51 @@ const Home: React.FC = () => {
             </Button>
           </div>
         </div>
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <List
-            dataSource={walletNFT}
-            style={{ display: "flex", justifyContent: "center" }}
-            grid={{
-              gutter: 10,
-              column: 4,
-              xxl: 6,
-              xl: 5,
-              lg: 4,
-              md: 3,
-              sm: 2,
-              xs: 1,
+        {isLoading ? (
+          <div
+            style={{
+              minHeight: "60vh",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
             }}
-            renderItem={(item) => (
-              <List.Item>
-                <ArtCard
-                  loading={isLoading}
-                  onClick={() => {
-                    setSelectedNFT(item);
-                    setVisible(true);
-                  }}
-                  item={item.manifest}
-                  hoverable
-                  style={{ borderRadius: 10 }}
-                >
-                  <Meta title={item.manifest.name} description={item.manifest.description} />
-                </ArtCard>
-              </List.Item>
-            )}
-          />
-        </div>
+          >
+            <Spin size="large" />
+          </div>
+        ) : (
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <List
+              dataSource={walletNFT}
+              style={{ display: "flex", justifyContent: "center" }}
+              grid={{
+                gutter: 10,
+                column: 4,
+                xxl: 6,
+                xl: 5,
+                lg: 4,
+                md: 3,
+                sm: 2,
+                xs: 1,
+              }}
+              renderItem={(item) => (
+                <List.Item>
+                  <ArtCard
+                    loading={isLoading}
+                    onClick={() => {
+                      setSelectedNFT(item);
+                      setVisible(true);
+                    }}
+                    item={item.manifest}
+                    hoverable
+                    style={{ borderRadius: 10 }}
+                  >
+                    <Meta title={item.manifest.name} description={item.manifest.description} />
+                  </ArtCard>
+                </List.Item>
+              )}
+            />
+          </div>
+        )}
         <BackTop style={{ right: 35 }}>
           <div style={custom}>
             <ArrowUpOutlined />
