@@ -7,7 +7,7 @@ import { CustomMetadata } from "../../types";
 
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 // import { useMeta } from "../../contexts";
-import { fetch_accounts, get_all_nft_from_wallet } from "../../actions";
+import { fetch_accounts, get_all_nft_from_wallet, burn_nft_transac } from "../../actions";
 import { ArtCard } from "../../components";
 
 const { Content } = Layout;
@@ -31,6 +31,12 @@ const Home: React.FC = () => {
     };
     fnGetMintMetadata();
   }, [wallet, connection, setWalletNFT]);
+
+  const burn_selected_nft = async () => {
+    try {
+      await fetch_accounts(wallet, connection);
+    } catch (error) {}
+  };
 
   return (
     <Layout>
@@ -90,7 +96,6 @@ const Home: React.FC = () => {
         onCancel={() => {
           setVisible(false);
           setSelectedNFT(null);
-          console.log("onCancel");
         }}
         width={600}
       >
@@ -129,6 +134,11 @@ const Home: React.FC = () => {
                 />
               </div>
             </div>
+          </div>
+          <div style={burn_btn_style}>
+            <Button style={ButtonStyle} onClick={burn_selected_nft}>
+              Burn NFT
+            </Button>
           </div>
         </div>
       </Modal>
@@ -178,6 +188,12 @@ const custom: React.CSSProperties = {
   color: "#fff",
   textAlign: "center",
   fontSize: 14,
+};
+
+const burn_btn_style: React.CSSProperties = {
+  display: "flex",
+  justifyContent: "center",
+  marginTop: 10,
 };
 
 export default Home;

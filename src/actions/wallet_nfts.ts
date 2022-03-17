@@ -1,6 +1,6 @@
 import { Connection } from "@metaplex/js";
 import { Metadata, MetadataData } from "@metaplex-foundation/mpl-token-metadata";
-import { TOKEN_PROGRAM_ID } from "@solana/spl-token";
+import { TOKEN_PROGRAM_ID, Token } from "@solana/spl-token";
 import { WalletContextState } from "@solana/wallet-adapter-react";
 import { TransactionInstruction, Transaction, PublicKey } from "@solana/web3.js";
 import { getManifestData } from "./helper";
@@ -31,6 +31,7 @@ export const get_all_nft_from_wallet = async (
   }
 };
 
+/// eg for signing transaction through wallet
 /// eg for signing transaction through wallet
 export const signTransactions = async (wallet: WalletContextState, connection: Connection) => {
   try {
