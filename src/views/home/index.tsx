@@ -62,7 +62,15 @@ const Home: React.FC = () => {
             }}
             renderItem={(item, index) => (
               <List.Item>
-                <ArtCard item={item.manifest} hoverable style={{ borderRadius: 10 }}>
+                <ArtCard
+                  onClick={() => {
+                    setSelectedNFT(item);
+                    setVisible(true);
+                  }}
+                  item={item.manifest}
+                  hoverable
+                  style={{ borderRadius: 10 }}
+                >
                   <Meta title={item.manifest.name} description={item.manifest.description} />
                 </ArtCard>
               </List.Item>
@@ -88,18 +96,21 @@ const Home: React.FC = () => {
       >
         <div>
           <div className="content-wrap-style" style={ContentWrapStyle}>
-            {/* <div className="flex-start-style" style={FlexStart}>
+            <div className="flex-start-style" style={FlexStart}>
               <Card
                 hoverable
                 className="card-style"
                 style={{ ...CardStyle, width: 300 }}
-                cover={<img alt="example" src={selectedNFT?.image} />}
+                cover={<img alt="example" src={selectedNFT?.manifest.image} />}
               >
-                <Meta title={selectedNFT?.name} description={selectedNFT?.description} />
+                <Meta
+                  title={selectedNFT?.manifest.name}
+                  description={selectedNFT?.manifest.description}
+                />
               </Card>
               <div className="attributes-style">
                 <List
-                  dataSource={selectedNFT?.attributes}
+                  dataSource={selectedNFT?.manifest.attributes}
                   style={{ padding: 10 }}
                   grid={{
                     gutter: 5,
@@ -117,7 +128,7 @@ const Home: React.FC = () => {
                   )}
                 />
               </div>
-            </div> */}
+            </div>
           </div>
         </div>
       </Modal>
