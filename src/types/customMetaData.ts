@@ -38,4 +38,5 @@ export interface NFT_Props {
 
 export interface CustomMetadata extends MetadataData {
   manifest: NFT_Props;
+  tokenAccount: any;
 }

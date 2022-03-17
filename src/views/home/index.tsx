@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Layout, Button, List, Card, BackTop, Modal } from "antd";
+import { Layout, Button, List, Card, BackTop, Modal, notification } from "antd";
 import { ArrowUpOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { ContentStyle, RowStyle, ButtonStyle } from "../../CommonStyle";
@@ -19,6 +19,7 @@ const Home: React.FC = () => {
   const { connection } = useConnection();
   const [selectedNFT, setSelectedNFT] = React.useState<CustomMetadata | null>();
   const [walletNFT, setWalletNFT] = React.useState<Array<CustomMetadata> | []>();
+
   const navigate = useNavigate();
   const wallet = useWallet();
 
@@ -32,11 +33,22 @@ const Home: React.FC = () => {
     fnGetMintMetadata();
   }, [wallet, connection, setWalletNFT]);
 
-  const burn_selected_nft = async () => {
+  const burn_selected_nft = React.useCallback(async () => {
     try {
-      await fetch_accounts(wallet, connection);
+      const openNotification = () => {
+        notification.success({
+          message: "",
+          description: "Token burn is successful",
+        });
+      };
+      await burn_nft_transac(wallet, connection, selectedNFT!.mint, selectedNFT!.tokenAccount);
+      setSelectedNFT(null);
+      setVisible(false);
+      openNotification();
+      const metadata = await get_all_nft_from_wallet(wallet, connection);
+      setWalletNFT(metadata);
     } catch (error) {}
-  };
+  }, [connection, selectedNFT, wallet]);
 
   return (
     <Layout>

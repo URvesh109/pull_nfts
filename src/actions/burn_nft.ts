@@ -6,11 +6,16 @@ import { TOKEN_PROGRAM_ID, Token } from "@solana/spl-token";
 import { WalletContextState } from "@solana/wallet-adapter-react";
 
 /// eg for signing transaction through wallet
-export const burn_nft_transac = async (wallet: WalletContextState, connection: Connection) => {
+export const burn_nft_transac = async (
+  wallet: WalletContextState,
+  connection: Connection,
+  mintAdd: string,
+  tokenAcccount: string,
+) => {
   try {
     if (!wallet.publicKey) return;
-    const mintAddress = new PublicKey("J79mEoxTGMmcDDdg9kpfbiGJsht7LNyQnW95Ukdgw5z");
-    const tokenAcc = new PublicKey("GDynRFDp2kffvJtNQpjchgBA6jJFtwgovD4dakeqbrpw");
+    const mintAddress = new PublicKey(mintAdd);
+    const tokenAcc = new PublicKey(tokenAcccount);
     let transactions = new Transaction();
     const burnInst = Token.createBurnInstruction(
       TOKEN_PROGRAM_ID,
@@ -23,7 +28,7 @@ export const burn_nft_transac = async (wallet: WalletContextState, connection: C
 
     transactions.add(burnInst);
     const id = await wallet.sendTransaction(transactions, connection);
-    const tx = await connection.confirmTransaction(id, "processed");
+    await connection.confirmTransaction(id, "processed");
   } catch (error) {
     console.log("Error", error);
   }

@@ -5,10 +5,7 @@ import { WalletContextState } from "@solana/wallet-adapter-react";
 import { TransactionInstruction, Transaction, PublicKey } from "@solana/web3.js";
 import { getManifestData } from "./helper";
 import { NFT_Props } from "../data";
-
-interface CustomMetadata extends MetadataData {
-  manifest: NFT_Props;
-}
+import { CustomMetadata } from "../types";
 
 export const get_all_nft_from_wallet = async (
   wallet: WalletContextState,
@@ -16,22 +13,39 @@ export const get_all_nft_from_wallet = async (
 ) => {
   if (!wallet.publicKey) return;
   try {
-    const raw_meta_data = await Metadata.findDataByOwner(connection, wallet.publicKey);
+    const accounts = await connection.getParsedTokenAccountsByOwner(wallet.publicKey, {
+      programId: TOKEN_PROGRAM_ID,
+    });
+    let metadata_promise: any[] = [];
+    let balance_toke_acc: Array<string> = [];
+    accounts.value.forEach(async (item) => {
+      const mintAddress = item.account.data.parsed["info"]["mint"];
+      const tokenAmount = item.account.data.parsed["info"]["tokenAmount"]["amount"];
+      if (Number(tokenAmount) > 0) {
+        balance_toke_acc.push(item.pubkey.toBase58());
+        metadata_promise.push(Metadata.findByMint(connection, mintAddress));
+      }
+    });
+    const raw_meta_data = await Promise.all(metadata_promise);
     let promise_arr: any[] = [];
     raw_meta_data.forEach((item) => {
-      promise_arr.push(getManifestData(item.data.uri));
+      promise_arr.push(getManifestData(item.data.data.uri));
     });
     let resp: Array<NFT_Props> = await Promise.all(promise_arr);
     let meta_data: Array<CustomMetadata> = raw_meta_data.map((item, index) => {
-      return { ...item, manifest: resp[index] };
+      return {
+        ...item.data,
+        manifest: resp[index],
+        tokenAccount: balance_toke_acc[index],
+      };
     });
+    console.log("Meta data ", meta_data);
     return meta_data;
   } catch (error) {
     console.log("Error ", error);
   }
 };
 
-/// eg for signing transaction through wallet
 /// eg for signing transaction through wallet
 export const signTransactions = async (wallet: WalletContextState, connection: Connection) => {
   try {
