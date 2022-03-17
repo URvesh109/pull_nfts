@@ -9,10 +9,7 @@ import Eight from "./assets/images/7.png";
 import Nine from "./assets/images/8.png";
 import Ten from "./assets/images/9.png";
 
-import {
-  MetadataData,
-  Metadata,
-} from "@metaplex-foundation/mpl-token-metadata";
+import { MetadataData, Metadata } from "@metaplex-foundation/mpl-token-metadata";
 
 export const decodeMetadata = (buffer: Buffer): Metadata => {
   return MetadataData.deserialize(buffer);
@@ -44,22 +41,21 @@ export interface Properties_Props {
 }
 
 export interface NFT_Props {
-  name: string;
-  symbol: string;
-  description: string;
-  seller_fee_basis_points: number;
-  image: string;
   attributes: Array<Attributes_Props>;
-  properties: Properties_Props;
   collection: Collection_Props;
+  description: string;
+  image: string;
+  name: string;
+  properties: Properties_Props;
+  seller_fee_basis_points: number;
+  symbol: string;
 }
 
 export const nfts: Array<NFT_Props> = [
   {
     name: "Number #0001",
     symbol: "NB",
-    description:
-      "Collection of 10 numbers on the blockchain. This is the number 1/10.",
+    description: "Collection of 10 numbers on the blockchain. This is the number 1/10.",
     seller_fee_basis_points: 500,
     image: One,
     attributes: [
@@ -69,9 +65,7 @@ export const nfts: Array<NFT_Props> = [
       { trait_type: "Layer-4", value: "1" },
     ],
     properties: {
-      creators: [
-        { address: "6j4nNrozTJkk1zatiXHezSLZArnRUq3WkGKHACThXGpZ", share: 100 },
-      ],
+      creators: [{ address: "6j4nNrozTJkk1zatiXHezSLZArnRUq3WkGKHACThXGpZ", share: 100 }],
       files: [{ uri: "0.png", type: "image/png" }],
     },
     collection: { name: "numbers", family: "numbers" },
@@ -79,8 +73,7 @@ export const nfts: Array<NFT_Props> = [
   {
     name: "Number #0002",
     symbol: "NB",
-    description:
-      "Collection of 10 numbers on the blockchain. This is the number 2/10.",
+    description: "Collection of 10 numbers on the blockchain. This is the number 2/10.",
     seller_fee_basis_points: 500,
     image: Two,
     attributes: [
@@ -90,9 +83,7 @@ export const nfts: Array<NFT_Props> = [
       { trait_type: "Layer-4", value: "2" },
     ],
     properties: {
-      creators: [
-        { address: "6j4nNrozTJkk1zatiXHezSLZArnRUq3WkGKHACThXGpZ", share: 100 },
-      ],
+      creators: [{ address: "6j4nNrozTJkk1zatiXHezSLZArnRUq3WkGKHACThXGpZ", share: 100 }],
       files: [{ uri: "1.png", type: "image/png" }],
     },
     collection: { name: "numbers", family: "numbers" },
@@ -100,8 +91,7 @@ export const nfts: Array<NFT_Props> = [
   {
     name: "Number #0003",
     symbol: "NB",
-    description:
-      "Collection of 10 numbers on the blockchain. This is the number 3/10.",
+    description: "Collection of 10 numbers on the blockchain. This is the number 3/10.",
     seller_fee_basis_points: 500,
     image: Three,
     attributes: [
@@ -111,9 +101,7 @@ export const nfts: Array<NFT_Props> = [
       { trait_type: "Layer-4", value: "3" },
     ],
     properties: {
-      creators: [
-        { address: "6j4nNrozTJkk1zatiXHezSLZArnRUq3WkGKHACThXGpZ", share: 100 },
-      ],
+      creators: [{ address: "6j4nNrozTJkk1zatiXHezSLZArnRUq3WkGKHACThXGpZ", share: 100 }],
       files: [{ uri: "2.png", type: "image/png" }],
     },
     collection: { name: "numbers", family: "numbers" },
@@ -121,8 +109,7 @@ export const nfts: Array<NFT_Props> = [
   {
     name: "Number #0004",
     symbol: "NB",
-    description:
-      "Collection of 10 numbers on the blockchain. This is the number 4/10.",
+    description: "Collection of 10 numbers on the blockchain. This is the number 4/10.",
     seller_fee_basis_points: 500,
     image: Four,
     attributes: [
@@ -132,9 +119,7 @@ export const nfts: Array<NFT_Props> = [
       { trait_type: "Layer-4", value: "4" },
     ],
     properties: {
-      creators: [
-        { address: "6j4nNrozTJkk1zatiXHezSLZArnRUq3WkGKHACThXGpZ", share: 100 },
-      ],
+      creators: [{ address: "6j4nNrozTJkk1zatiXHezSLZArnRUq3WkGKHACThXGpZ", share: 100 }],
       files: [{ uri: "3.png", type: "image/png" }],
     },
     collection: { name: "numbers", family: "numbers" },
@@ -142,8 +127,7 @@ export const nfts: Array<NFT_Props> = [
   {
     name: "Number #0005",
     symbol: "NB",
-    description:
-      "Collection of 10 numbers on the blockchain. This is the number 5/10.",
+    description: "Collection of 10 numbers on the blockchain. This is the number 5/10.",
     seller_fee_basis_points: 500,
     image: Five,
     attributes: [
@@ -153,9 +137,7 @@ export const nfts: Array<NFT_Props> = [
       { trait_type: "Layer-4", value: "5" },
     ],
     properties: {
-      creators: [
-        { address: "6j4nNrozTJkk1zatiXHezSLZArnRUq3WkGKHACThXGpZ", share: 100 },
-      ],
+      creators: [{ address: "6j4nNrozTJkk1zatiXHezSLZArnRUq3WkGKHACThXGpZ", share: 100 }],
       files: [{ uri: "4.png", type: "image/png" }],
     },
     collection: { name: "numbers", family: "numbers" },
@@ -163,8 +145,7 @@ export const nfts: Array<NFT_Props> = [
   {
     name: "Number #0006",
     symbol: "NB",
-    description:
-      "Collection of 10 numbers on the blockchain. This is the number 6/10.",
+    description: "Collection of 10 numbers on the blockchain. This is the number 6/10.",
     seller_fee_basis_points: 500,
     image: Six,
     attributes: [
@@ -174,9 +155,7 @@ export const nfts: Array<NFT_Props> = [
       { trait_type: "Layer-4", value: "6" },
     ],
     properties: {
-      creators: [
-        { address: "6j4nNrozTJkk1zatiXHezSLZArnRUq3WkGKHACThXGpZ", share: 100 },
-      ],
+      creators: [{ address: "6j4nNrozTJkk1zatiXHezSLZArnRUq3WkGKHACThXGpZ", share: 100 }],
       files: [{ uri: "5.png", type: "image/png" }],
     },
     collection: { name: "numbers", family: "numbers" },
@@ -184,8 +163,7 @@ export const nfts: Array<NFT_Props> = [
   {
     name: "Number #0007",
     symbol: "NB",
-    description:
-      "Collection of 10 numbers on the blockchain. This is the number 7/10.",
+    description: "Collection of 10 numbers on the blockchain. This is the number 7/10.",
     seller_fee_basis_points: 500,
     image: Seven,
     attributes: [
@@ -195,9 +173,7 @@ export const nfts: Array<NFT_Props> = [
       { trait_type: "Layer-4", value: "7" },
     ],
     properties: {
-      creators: [
-        { address: "6j4nNrozTJkk1zatiXHezSLZArnRUq3WkGKHACThXGpZ", share: 100 },
-      ],
+      creators: [{ address: "6j4nNrozTJkk1zatiXHezSLZArnRUq3WkGKHACThXGpZ", share: 100 }],
       files: [{ uri: "6.png", type: "image/png" }],
     },
     collection: { name: "numbers", family: "numbers" },
@@ -205,8 +181,7 @@ export const nfts: Array<NFT_Props> = [
   {
     name: "Number #0008",
     symbol: "NB",
-    description:
-      "Collection of 10 numbers on the blockchain. This is the number 8/10.",
+    description: "Collection of 10 numbers on the blockchain. This is the number 8/10.",
     seller_fee_basis_points: 500,
     image: Eight,
     attributes: [
@@ -216,9 +191,7 @@ export const nfts: Array<NFT_Props> = [
       { trait_type: "Layer-4", value: "8" },
     ],
     properties: {
-      creators: [
-        { address: "6j4nNrozTJkk1zatiXHezSLZArnRUq3WkGKHACThXGpZ", share: 100 },
-      ],
+      creators: [{ address: "6j4nNrozTJkk1zatiXHezSLZArnRUq3WkGKHACThXGpZ", share: 100 }],
       files: [{ uri: "7.png", type: "image/png" }],
     },
     collection: { name: "numbers", family: "numbers" },
@@ -226,8 +199,7 @@ export const nfts: Array<NFT_Props> = [
   {
     name: "Number #0009",
     symbol: "NB",
-    description:
-      "Collection of 10 numbers on the blockchain. This is the number 9/10.",
+    description: "Collection of 10 numbers on the blockchain. This is the number 9/10.",
     seller_fee_basis_points: 500,
     image: Nine,
     attributes: [
@@ -237,9 +209,7 @@ export const nfts: Array<NFT_Props> = [
       { trait_type: "Layer-4", value: "9" },
     ],
     properties: {
-      creators: [
-        { address: "6j4nNrozTJkk1zatiXHezSLZArnRUq3WkGKHACThXGpZ", share: 100 },
-      ],
+      creators: [{ address: "6j4nNrozTJkk1zatiXHezSLZArnRUq3WkGKHACThXGpZ", share: 100 }],
       files: [{ uri: "8.png", type: "image/png" }],
     },
     collection: { name: "numbers", family: "numbers" },
@@ -247,8 +217,7 @@ export const nfts: Array<NFT_Props> = [
   {
     name: "Number #0010",
     symbol: "NB",
-    description:
-      "Collection of 10 numbers on the blockchain. This is the number 10/10.",
+    description: "Collection of 10 numbers on the blockchain. This is the number 10/10.",
     seller_fee_basis_points: 500,
     image: Ten,
     attributes: [
@@ -258,9 +227,7 @@ export const nfts: Array<NFT_Props> = [
       { trait_type: "Layer-4", value: "0" },
     ],
     properties: {
-      creators: [
-        { address: "6j4nNrozTJkk1zatiXHezSLZArnRUq3WkGKHACThXGpZ", share: 100 },
-      ],
+      creators: [{ address: "6j4nNrozTJkk1zatiXHezSLZArnRUq3WkGKHACThXGpZ", share: 100 }],
       files: [{ uri: "9.png", type: "image/png" }],
     },
     collection: { name: "numbers", family: "numbers" },

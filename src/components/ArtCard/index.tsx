@@ -1,20 +1,16 @@
 import React from "react";
 import { Card, CardProps } from "antd";
-import { MetadataData } from "@metaplex-foundation/mpl-token-metadata";
-import { useCachedImage } from "../../hooks";
 import { Image } from "antd";
-
+import { NFT_Props } from "../../types";
 export interface ArtCardProps extends CardProps {
-  item: MetadataData;
+  item: NFT_Props;
 }
 
 export const ArtCard = (props: ArtCardProps) => {
   const { item, children, ...restProps } = props;
-  const { cachedBlob, isLoading } = useCachedImage(item.data.uri);
-
   return (
     <>
-      <Card loading={isLoading} cover={<Image alt="example" src={cachedBlob} />} {...restProps}>
+      <Card cover={<Image alt="example" src={item.image} />} {...restProps}>
         {children}
       </Card>
     </>

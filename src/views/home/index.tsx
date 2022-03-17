@@ -3,7 +3,7 @@ import { Layout, Button, List, Card, BackTop, Modal } from "antd";
 import { ArrowUpOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { ContentStyle, RowStyle, ButtonStyle } from "../../CommonStyle";
-import { MetadataData } from "@metaplex-foundation/mpl-token-metadata";
+import { CustomMetadata } from "../../types";
 
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 // import { useMeta } from "../../contexts";
@@ -17,8 +17,8 @@ const Home: React.FC = () => {
   const [visible, setVisible] = React.useState(false);
   // const { foreground, background } = useMeta();
   const { connection } = useConnection();
-  const [selectedNFT, setSelectedNFT] = React.useState<MetadataData | null>();
-  const [walletNFT, setWalletNFT] = React.useState<Array<MetadataData> | []>();
+  const [selectedNFT, setSelectedNFT] = React.useState<CustomMetadata | null>();
+  const [walletNFT, setWalletNFT] = React.useState<Array<CustomMetadata> | []>();
   const navigate = useNavigate();
   const wallet = useWallet();
 
@@ -62,8 +62,8 @@ const Home: React.FC = () => {
             }}
             renderItem={(item, index) => (
               <List.Item>
-                <ArtCard item={item} hoverable style={{ borderRadius: 10 }}>
-                  <Meta title={item.data.name} description={item.data.symbol} />
+                <ArtCard item={item.manifest} hoverable style={{ borderRadius: 10 }}>
+                  <Meta title={item.manifest.name} description={item.manifest.description} />
                 </ArtCard>
               </List.Item>
             )}
