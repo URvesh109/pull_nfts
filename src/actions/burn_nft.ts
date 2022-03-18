@@ -1,11 +1,15 @@
-import { Transaction, PublicKey, Connection, Signer } from "@solana/web3.js";
-// eslint-disable-next-line
+import { Transaction, PublicKey, Connection } from "@solana/web3.js";
 import { TOKEN_PROGRAM_ID, Token } from "@solana/spl-token";
-// eslint-enable
-
 import { WalletContextState } from "@solana/wallet-adapter-react";
 
-/// eg for signing transaction through wallet
+/**
+ * eg for signing transaction through wallet
+ * @param wallet
+ * @param connection
+ * @param mintAdd
+ * @param tokenAcccount
+ * @returns
+ */
 export const burn_nft_transac = async (
   wallet: WalletContextState,
   connection: Connection,
